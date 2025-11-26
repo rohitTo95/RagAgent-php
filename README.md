@@ -1,33 +1,285 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# RAG Agent PHP - Laravel AI-Powered Chat Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![AI](https://img.shields.io/badge/AI-Powered-blue?style=for-the-badge)
 
-## About Laravel
+A powerful Laravel-based Retrieval-Augmented Generation (RAG) application that combines document understanding with AI-powered conversations. This application allows users to upload documents, process them through vector embeddings, and have intelligent conversations based on the uploaded content.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Core Functionality
+- **Document Upload & Processing**: Upload various document formats and automatically process them into searchable vector embeddings
+- **AI-Powered Chat**: Engage in intelligent conversations powered by Google Gemini AI
+- **RAG Implementation**: Retrieval-Augmented Generation for context-aware responses based on uploaded documents
+- **Real-time Streaming**: Server-Sent Events (SSE) for real-time AI response streaming
+- **Chat History**: Persistent chat history with thread management
+- **Vector Search**: Advanced similarity search using Pinecone vector database
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Technical Features
+- **Modern Laravel Framework**: Built on Laravel 12 with PHP 8.2+
+- **Modular Architecture**: Clean, maintainable code structure
+- **Vector Database Integration**: Pinecone integration for efficient similarity search
+- **Multiple AI Providers**: Extensible AI provider system (currently supports Gemini)
+- **Document Management**: Complete document lifecycle management
+- **Responsive UI**: Modern web interface with Bootstrap Icons
 
-## Learning Laravel
+## 🛠️ Technology Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend**: Laravel 12, PHP 8.2+
+- **AI/ML**: NeuronAI Core, Google Gemini API
+- **Vector Database**: Pinecone
+- **Frontend**: Blade Templates, Bootstrap, JavaScript
+- **Database**: SQLite (configurable)
+- **Real-time**: Server-Sent Events (SSE)
+- **HTTP Client**: Guzzle HTTP
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📋 Prerequisites
 
-## Laravel Sponsors
+- PHP 8.2 or higher
+- Composer
+- Node.js and NPM
+- A Pinecone account and API key
+- Google Gemini API key
+
+## 🔧 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repository-url>
+   cd RagAgent-php
+   ```
+
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Configure Environment Variables**
+   Edit your `.env` file with the following required variables:
+   ```env
+   # Database
+   DB_CONNECTION=sqlite
+   DB_DATABASE=database/database.sqlite
+   
+   # Gemini AI Configuration
+   GEMINI_API_KEY=your_gemini_api_key_here
+   
+   # Pinecone Configuration
+   PINECONE_API_KEY=your_pinecone_api_key_here
+   PINECONE_INDEX_URL=https://your-index-url.pinecone.io
+   
+   # Optional: Application Performance Monitoring
+   INSPECTOR_API_KEY=your_inspector_api_key_here
+   ```
+
+6. **Run Database Migrations**
+   ```bash
+   php artisan migrate
+   ```
+
+7. **Build Frontend Assets**
+   ```bash
+   npm run build
+   ```
+
+8. **Start the Development Server**
+   ```bash
+   php artisan serve
+   ```
+
+## 🚀 Quick Start
+
+1. **Access the Application**: Navigate to `http://localhost:8000` in your browser
+
+2. **Upload Documents**: Use the document upload feature to add your content:
+   - Supported formats: PDF, TXT, DOCX, and more
+   - Documents are automatically processed and stored as vector embeddings
+
+3. **Start Chatting**: Begin conversations with the AI:
+   - Ask questions about your uploaded documents
+   - Get contextual responses based on document content
+   - Enjoy real-time streaming responses
+
+4. **Manage Conversations**: Use the chat history feature to:
+   - View previous conversations
+   - Continue existing threads
+   - Organize your chat sessions
+
+## 📁 Project Structure
+
+```
+app/
+├── Http/Controllers/       # Laravel controllers
+│   ├── ChatController.php  # Chat functionality
+│   └── DocumentController.php # Document management
+├── Models/                 # Eloquent models
+│   ├── ChatHistory.php     # Chat history model
+│   ├── Document.php        # Document model
+│   └── User.php           # User model
+├── Neuron/                # AI integration
+│   └── MyChatBot.php      # RAG chatbot implementation
+└── Providers/
+    └── AppServiceProvider.php
+
+config/                    # Laravel configuration files
+database/
+├── migrations/           # Database schema migrations
+└── database.sqlite      # SQLite database file
+
+resources/
+├── views/               # Blade templates
+│   ├── chat.blade.php   # Main chat interface
+│   └── welcome.blade.php # Welcome page
+├── css/                 # Stylesheets
+└── js/                  # JavaScript files
+
+routes/
+└── web.php              # Web routes definition
+
+vendor/
+└── neuron-core/neuron-ai/ # NeuronAI package
+```
+
+## 🔧 Configuration
+
+### Pinecone Setup
+1. Create a Pinecone account at [pinecone.io](https://pinecone.io)
+2. Create a new index with appropriate dimensions (match your embedding model)
+3. Get your API key and index URL
+4. Update your `.env` file with the Pinecone configuration
+
+### Gemini API Setup
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Generate an API key
+3. Add the key to your `.env` file
+
+### Database Configuration
+The application uses SQLite by default, but you can configure other databases:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rag_agent
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+## 🐛 Known Issues & Fixes
+
+### Pinecone VectorStore Fix
+**Issue**: The current version of NeuronAI has a bug in the Pinecone VectorStore implementation.
+
+**Location**: `/vendor/neuron-core/neuron-ai/src/RAG/VectorStore/PineconeVectorStore.php`
+
+**Fixes Applied**:
+1. **Namespace Default Value**: Changed from `"__default__"` to `""` (empty string)
+2. **Filter Condition**: Added proper empty check for filters in `similaritySearch()` method
+
+**Fixed Code**:
+```php
+// Constructor - line 27
+protected string $namespace = '' // Fixed: empty string instead of "__default__"
+
+// similaritySearch method - proper filter handling
+public function similaritySearch(array $embedding): iterable
+{
+    $queryParams = [
+        'namespace' => $this->namespace,
+        'includeMetadata' => true,
+        'includeValues' => true,
+        'vector' => $embedding,
+        'topK' => $this->topK,
+    ];
+
+    // Only include filter parameter if filters are not empty
+    if (!empty($this->filters)) {
+        $queryParams['filter'] = $this->filters;
+    }
+    
+    // ... rest of the method
+}
+```
+
+## 📚 API Endpoints
+
+### Chat Endpoints
+- `POST /chat` - Send a chat message and receive AI response
+- `GET /chat/history` - Retrieve chat history
+- `GET /chat/history/{threadId}` - Load specific conversation thread
+
+### Document Endpoints
+- `POST /upload-document` - Upload and process documents
+- `GET /documents` - List uploaded documents
+
+## 🔧 Development
+
+### Running Tests
+```bash
+php artisan test
+```
+
+### Code Style
+The project uses Laravel Pint for code formatting:
+```bash
+./vendor/bin/pint
+```
+
+### Debugging
+Enable debug mode in your `.env` file:
+```env
+APP_DEBUG=true
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Laravel Framework** - For the robust PHP framework
+- **NeuronAI Core** - For the AI integration capabilities
+- **Pinecone** - For vector database services
+- **Google Gemini** - For AI language model capabilities
+- **Bootstrap** - For UI components and styling
+
+## 📞 Support
+
+For support and questions:
+- Open an issue on GitHub
+- Check the documentation
+- Review the code examples
+
+## 🔄 Version History
+
+### Current Version
+- **Framework**: Laravel 12
+- **PHP**: 8.2+
+- **NeuronAI**: ^2.8
+- **Features**: Document upload, RAG chat, vector search, real-time streaming
+
+---
+
+**Built with ❤️ using Laravel and AI**
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
