@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+@plugin "daisyui";
+
+@plugin "daisyui" {
+    themes: light, dim;
+}
